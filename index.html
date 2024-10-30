@@ -152,13 +152,24 @@
             right: 0;
             width: 100%;
             height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #skip_buton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            z-index: 10;
         }
     </style>
 </head>
 
 <body>
     <div id="player"></div>
-
+    <button id="skip_buton" onclick="OnSkipPressed()">Skip</button>
     <script>
         var tag = document.createElement("script");
 
@@ -167,6 +178,8 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
+        var isSkipPressed = false;
+
         function onYouTubeIframeAPIReady() {
             const queryString = window.location.search;
             const params = new URLSearchParams(queryString);
@@ -174,7 +187,7 @@
             player = new YT.Player("player", {
                 height: window.innerHeight,
                 width: window.innerWidth,
-                videoId: params.get("track_id"),
+                videoId: "m4noSJqxvCI",
                 playerVars: {
                     "playsinline": 1,
                     "controls": 0,
@@ -225,6 +238,13 @@
         function setPlaybackRate(value) {
             player.setPlaybackRate(value);
         }
+        function OnSkipPressed() {
+            isSkipPressed = true;
+        }
+        function getWasSkipped() {
+            return isSkipPressed;
+        }
+
     </script>
 </body>
 
